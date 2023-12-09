@@ -1,36 +1,57 @@
 #include "shell.h"
 
-
-
-
+void big_print(const char *message) {
+    write(1, message, strlen(message));
+}
 
 int main()
 {
 	char line[MAX_INPUT_LINE];
 	char *args[MAX_ARGS];
-	int i = 0;	
+	int i = 0;
+	pid_t pid = fork();
 
 
 	while(1)
 	{
-		 printf("shell$ ");
+		 printf("cisfun$ ");
+
 		 if (fgets(line, MAX_INPUT_LINE, stdin) == NULL)
 		 {
-			 printf("Error reading input");
+			 perror("Error reading input\n");
 			 break;
+		 }
+
+		 line[strcspn(line, "\n")] = '\0';
+		 args[i] = strtok(line, " \n");
+		 
+
+		 while (args[i] != NULL && i < MAX_ARGS - 1)
+		 {
+			 i++;
+			 args[i] = strtok(NULL, " \n");
+		 }
+
+		 args[i] = NULL;
+
+		 if (args[0] != NULL && strcmp(args[0], "exit") == 0)
+		 {
+			 big_print("Exiting the shell.\n");
+			 break;
+		 }
+
+		 if (pid == 0)
+		 {
+			execvp(args[0], args);
+			fprintf(stderr, "Error executing command: %s\n", args[0]);
+			exit(1);
+		 }
+		 else
+		 {
+			 wait(NULL);
+			 big_print("success\n");
 		 }
 	}
 
-	line[strcspn(line, "\n")] = '\0';
-
-	args[i] = strtok(line, " \n");
-	while (args[i] != NULL && i < MAX_ARGS - 1)
-	{
-		i++;
-		args[i] = strtok(NULL, " \n");
-	}
-
-	args[i] = NULL;
 	return (0);
 }
-
