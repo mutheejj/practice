@@ -13,8 +13,9 @@
 #include <errno.h>
 
 extern char **environ;
+int big_print(const char *format, ...);
 
-#define MAX_INPUT_LINE 1000
+#define MAX_INPUT_LINE 1024
 #define MAX_ARGS 1000
 
 
