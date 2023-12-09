@@ -1,7 +1,9 @@
 #include "shell.h"
-
-void big_print(const char *message) {
-    write(1, message, strlen(message));
+void big_print(const char *format, ...) {
+    va_list args;
+    va_start(args, format);
+    vfprintf(stdout, format, args);
+    va_end(args);
 }
 
 int main()
@@ -18,7 +20,7 @@ int main()
 
 		 if (fgets(line, MAX_INPUT_LINE, stdin) == NULL)
 		 {
-			 perror("Error reading input\n");
+			 perror("Error when reading input\n");
 			 break;
 		 }
 
