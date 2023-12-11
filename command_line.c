@@ -6,69 +6,63 @@ int main()
 {
 	char line[MAX_INPUT_LINE];
 	char *args[MAX_ARGS];
+	int argc = 0;
+	char *token;
 
 	while(1)
 	{
-		pid_t pid, ppid;
+		pid_t pid;
 		int sitrep;
+		
+		big_print("%s", "Cisfun$  ");
+		fflush(stdout);
+		memset(line, 0, sizeof(line));
 
-		pid = fork();
-
-		if (pid == -1)
+		if (fgets(line, MAX_INPUT_LINE, stdin) == NULL)
 		{
-			perror("Forkn't\n");
-			exit(1);
-		}
-
-		if (pid == 0)
-		{
-			big_print("cisfun$ ");
-			fflush(stdout);
-			
-			if (fgets(line, MAX_INPUT_LINE, stdin) == NULL)
+			if (feof(stdin))
 			{
-				perror("Error when reading input\n");
-				exit(1);
-			}
-			
-			line[strcspn(line, "\n")] = '\0';
-			
-			if (strcmp(line, "exit") == 0)
-			{
-				big_print("Exiting the shell\n");
+				big_print("\nExiting shell\n");
 				exit(0);
 			}
-
-			
-			args[0] = line;
-			args[1] = NULL;
-			
-			execvp(args[0], args);
-
+			else
+			{
+				perror("Error reading input\n");
+				break;
+			}
+		}
+		line[strcspn(line, "\n")] = '\0';
+		if (strcmp(line, "exit") == 0)
+		{
+			big_print("Exxxit\n");
+			exit(0);
+		}
+		argc = 0;
+		token = strtok(line, " ");
+		while (token != NULL)
+		{
+			args[argc++] = token;
+			token = strtok(NULL, " ");
+		}
+		args[argc] = NULL;
+		pid = fork();
+		if (pid == -1)
+		{
+			perror("Fork failed");
+			exit(1);
+		}
+		if (pid == 0)
+		{
 			if (execvp(args[0], args) == -1)
 			{
-				perror("Error executing command");
+				perror("Error executing comms");
 				exit(1);
 			}
 		}
 		else
 		{
-			while ((ppid = waitpid(pid, &sitrep, 0)) > 0);
-			if (ppid == -1)
-			{
-				perror("Child process traffic\n");
-				exit(1);
-			}
-			big_print("cisfun$ ");
-			fflush(stdout);
-			
-			if (strcmp(line, "exit") == 0)
-			{
-				big_print("Exiting the shell\n");
-				exit(0);
-			}
+			waitpid(pid, &sitrep, WUNTRACED);
 		}
 	}
 	return (0);
 }
-	

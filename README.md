@@ -1,1 +1,1 @@
-# practice
+Simple shell project
