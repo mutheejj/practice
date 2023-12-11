@@ -2,18 +2,18 @@
 
 
 
-int main()
+int main(void)
 {
 	char line[MAX_INPUT_LINE];
 	char *args[MAX_ARGS];
 	int argc = 0;
 	char *token;
 
-	while(1)
+	while (1)
 	{
 		pid_t pid;
 		int sitrep;
-		
+
 		big_print("%s", "Cisfun$  ");
 		fflush(stdout);
 		memset(line, 0, sizeof(line));
