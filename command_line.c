@@ -34,10 +34,8 @@ int main(void)
 		line[strcspn(line, "\n")] = '\0';
 		
 		if (strcmp(line, "exit") == 0)
-		{
-			big_print("Exxxit\n");
 			exit(0);
-		}
+		
 		argc = 0;
 		token = strtok(line, " ");
 		while (token != NULL)
