@@ -50,14 +50,14 @@ int main(void)
 		if (pid == -1)
 		{
 			perror("Fork failed");
-			exit(1);
+			exit(0);
 		}
 		if (pid == 0)
 		{
 			if (execvp(args[0], args) == -1)
 			{
 				perror("Error executing comms");
-				exit(1);
+				exit(0);
 			}
 		}
 		else
