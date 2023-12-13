@@ -2,18 +2,18 @@
 
 
 
-int main()
+int main(void)
 {
 	char line[MAX_INPUT_LINE];
 	char *args[MAX_ARGS];
 	int argc = 0;
 	char *token;
 
-	while(1)
+	while (1)
 	{
 		pid_t pid;
 		int sitrep;
-		
+
 		big_print("%s", "Cisfun$  ");
 		fflush(stdout);
 		memset(line, 0, sizeof(line));
@@ -32,7 +32,7 @@ int main()
 			}
 		}
 		line[strcspn(line, "\n")] = '\0';
-		/* tokenize line using space */
+		
 		if (strcmp(line, "exit") == 0)
 		{
 			big_print("Exxxit\n");

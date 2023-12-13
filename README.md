@@ -1,1 +1,1 @@
-Simple shell project
+Second ALX group project; building a simple shell
