@@ -32,6 +32,7 @@ int main()
 			}
 		}
 		line[strcspn(line, "\n")] = '\0';
+		/* tokenize line using space */
 		if (strcmp(line, "exit") == 0)
 		{
 			big_print("Exxxit\n");

@@ -14,9 +14,11 @@
 
 extern char **environ;
 int big_print(const char *format, ...);
+ssize_t letaline(char **rodman, size_t *q, FILE *lineup);
 
 #define MAX_INPUT_LINE 1024
 #define MAX_ARGS 1000
+
 
 
 #endif
