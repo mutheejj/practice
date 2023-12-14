@@ -5,11 +5,13 @@
 int main(void)
 {
 	char line[MAX_INPUT_LINE];
-	char *args[MAX_ARGS];
+	char **args = malloc(sizeof(char *) * MAX_ARGS);
 	int argc = 0;
 	char *token;
 	int i;
 
+	if (!args)
+		exit(0);
 	while (1)
 	{
 		pid_t pid;
@@ -24,7 +26,7 @@ int main(void)
 			if (feof(stdin))
 			{
 				big_print("\nExiting shell\n");
-				exit(0);
+				break;
 			}
 			else
 			{
@@ -35,7 +37,7 @@ int main(void)
 		line[strcspn(line, "\n")] = '\0';
 		
 		if (strcmp(line, "exit") == 0)
-			exit(0);
+			break;
 		
 		argc = 0;
 		token = strtok(line, " ");
@@ -49,7 +51,7 @@ int main(void)
 		if (pid == -1)
 		{
 			perror("Fork failed");
-			exit(0);
+			exit(1);
 		}
 		if (pid == 0)
 		{
@@ -67,6 +69,7 @@ int main(void)
 		{
 			free(args[i]);
 		}
-		}
+	}
+	free(args);
 	return (0);
 }
