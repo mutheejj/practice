@@ -43,10 +43,12 @@ ssize_t letaline(char **rodman, size_t *q, FILE *lineup)
 			(*rodman)[weight++] = buffer[index++];
 			break;
 		}
+		memset(buffer, 0, sizeof(buffer));
 		index = 0;
 	}
 	if (weight == 0)
 		return (-1);
 	(*rodman)[weight] = '\0';
+	free(*rodman);
 	return (weight);
 }

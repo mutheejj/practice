@@ -8,6 +8,7 @@ int main(void)
 	char *args[MAX_ARGS];
 	int argc = 0;
 	char *token;
+	int i;
 
 	while (1)
 	{
@@ -40,7 +41,7 @@ int main(void)
 		token = strtok(line, " ");
 		while (token != NULL)
 		{
-			args[argc++] = token;
+			args[argc++] = strdup(token);
 			token = strtok(NULL, " ");
 		}
 		args[argc] = NULL;
@@ -62,6 +63,10 @@ int main(void)
 		{
 			waitpid(pid, &sitrep, WUNTRACED);
 		}
-	}
+		for (i = 0; i < argc; i++)
+		{
+			free(args[i]);
+		}
+		}
 	return (0);
 }
