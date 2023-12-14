@@ -17,7 +17,7 @@ int main(void)
 		pid_t pid;
 		int sitrep;
 
-		big_print("%s", "Cisfun$  ");
+		big_print("Cisfun$  ");
 		fflush(stdout);
 		memset(line, 0, sizeof(line));
 
