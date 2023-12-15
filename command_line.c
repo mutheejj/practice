@@ -16,6 +16,7 @@ int main(void)
 		pid_t pid;
 		int sitrep;
 
+		big_print("$ ");
 		fflush(stdout);
 
 		if (fgets(line, MAX_INPUT_LINE, stdin) == NULL)
