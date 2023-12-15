@@ -37,11 +37,11 @@ ssize_t letaline(char **rodman, size_t *q, FILE *lineup)
 			if (weight >= *q - 1)
 			{
 				*q *= 2;
-				flim = (char *)realloc(*rodman, *q * sizeof(char));
+				flim = (char *)realloc(*rodman, *q);
 				if (flim == NULL)
 				{
 					free(*rodman);
-					return (size_t)-1;
+					return (-1);
 				}
 				*rodman = flim;
 			}
@@ -56,7 +56,5 @@ ssize_t letaline(char **rodman, size_t *q, FILE *lineup)
 	}
 	if (weight == 0)
 		return (size_t)-1;
-	(*rodman)[weight] = '\0';
-	memset(buffer, 0, sizeof(buffer));
 	return (weight);
 }

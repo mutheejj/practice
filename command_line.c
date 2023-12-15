@@ -5,7 +5,7 @@
 int main(void)
 {
 	char line[MAX_INPUT_LINE];
-	char **args = malloc(sizeof(char *) * MAX_ARGS);
+	char **args = NULL;
 	int argc = 0;
 	char *token;
 	int i;
@@ -43,8 +43,20 @@ int main(void)
 		token = strtok(line, " ");
 		while (token != NULL)
 		{
+			args = realloc(args, (argc + 1) * sizeof(char *));
+			if (args == NULL)
+			{
+				perror("error reallocating mem");
+				exit(EXIT_FAILURE);
+			}
 			args[argc++] = strdup(token);
 			token = strtok(NULL, " ");
+		}
+		args = realloc(args, (argc + 1) * sizeof(char *));
+		if (args == NULL)
+		{
+			perror("error reallocating mem");
+			exit(EXIT_FAILURE);
 		}
 		args[argc] = NULL;
 		pid = fork();
