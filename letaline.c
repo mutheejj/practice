@@ -11,13 +11,13 @@ ssize_t letaline(char **rodman, size_t *q, FILE *lineup)
 	size_t rb;
 
 	if(!rodman || !q)
-		return (size_t)-1;
+		return (-1);
 	if (*rodman == NULL)
 	{
 		*q = (*q == 0) ? 64: *q;
 		*rodman = (char *)malloc(*q);
 		if (*rodman == NULL)
-			return (size_t)-1;
+			return (-1);
 		(*rodman)[0] = '\0';
 	}
 	while (1)
@@ -28,7 +28,7 @@ ssize_t letaline(char **rodman, size_t *q, FILE *lineup)
 			if (rb == 0)
 			{
 				if (ferror(lineup))
-					return (size_t)-1;
+					return (-1);
 				break;
 			}
 		}
@@ -55,6 +55,6 @@ ssize_t letaline(char **rodman, size_t *q, FILE *lineup)
 		index = 0;
 	}
 	if (weight == 0)
-		return (size_t)-1;
+		return (-1);
 	return (weight);
 }
