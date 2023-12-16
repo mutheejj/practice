@@ -16,14 +16,12 @@ int main(void)
 		pid_t pid;
 		int sitrep;
 
-		big_print("$ ");
 		fflush(stdout);
 
 		if (fgets(line, MAX_INPUT_LINE, stdin) == NULL)
 		{
 			if (feof(stdin))
 			{
-				big_print("\nExiting shell\n");
 				break;
 			}
 			else
