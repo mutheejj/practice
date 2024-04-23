@@ -1,4 +1,5 @@
-# This file lists all contributors to the repository.
+# This file lists all individuals having contributed content to the repository.
+# For how it is generated, see `hack/generate-authors.sh`.
 
 John Maina <johnmaina@gmail.com> 
 Christopher Kimemia <kimemiachristopherr@gmail.com>
